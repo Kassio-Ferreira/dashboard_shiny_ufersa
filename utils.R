@@ -3,6 +3,7 @@ library(tidyr)
 library(dplyr)
 library(ggplot2)
 library(reshape2)
+library(DT)
 
 metas_para_BI <- read_excel("./data/metas_para_BI.xlsx")
 
@@ -10,11 +11,14 @@ metas_para_BI <- read_excel("./data/metas_para_BI.xlsx")
 
 # Funcao 1: retorna lista de metas ----------------------------------------
 
-lista_de_metas <- function(dados){
-  return(metas_para_BI$Meta %>% unique)
+lista_de_metas <- function(dados, perspectiva){
+  return((metas_para_BI %>% filter(Perspectiva == perspectiva))$Meta %>% unique)
 }
 
-lista_de_metas(metas_para_BI) -> lista
+lista_de_metas(metas_para_BI, "Financeira") -> lista_financeira
+lista_de_metas(metas_para_BI, "Sociedade") -> lista_sociedade
+lista_de_metas(metas_para_BI, "Processos Internos") -> lista_processos_internos
+lista_de_metas(metas_para_BI, "Aprendizagem e Crescimento") -> lista_aprendizagem_crescimento
 
 # Filtra os dados para uma meta e retorna dataframe -----------------------
 
@@ -65,3 +69,11 @@ plot_meta <- function(dados_meta){
   
 }
 
+# cria tabela -------------------------------------------------------------
+
+# cria_tabela <- function(dados){
+#   
+#   dados %>% datatable(rownames = FALSE)
+#   
+# }
+# 
