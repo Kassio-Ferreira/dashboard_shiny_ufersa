@@ -15,7 +15,7 @@ header$children[[2]]$children <- tags$div(
   class = 'name')
 
 
-ui <- dashboardPage(skin = "blue",
+ui <- dashboardPage(skin = "blue", title = "PDI UFERSA",
   
   header,  
   # dashboardHeader(title = "Plano de Desenvolvimento Institucional - UFERSA",
