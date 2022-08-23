@@ -2,10 +2,16 @@ library(readxl)
 library(tidyr)
 library(dplyr)
 library(ggplot2)
+library(ggthemes)
 library(reshape2)
 library(DT)
+library(scales)
 
-metas_para_BI <- read_excel("./data/metas_para_BI.xlsx")
+metas_para_BI <- read_excel("data/metas_para_BI.xlsx", 
+                            col_types = c("text", "text", "text", 
+                                          "text", "text", "numeric", "numeric", 
+                                          "numeric", "numeric", "numeric", 
+                                          "text", "text", "text"))
 
 
 
@@ -63,9 +69,19 @@ filtra_status <- function(meta){
 
 plot_meta <- function(dados_meta){
   
-  q <- ggplot(data = dados_meta)
-  q + geom_bar(aes(x = ano, y = valor, fill = tipo), stat = "identity",
-               position = "dodge")
+  dados_meta$ano <- as.factor(dados_meta$ano) 
+  
+  # Here we define spaces as the big separator
+  point <- format_format(big.mark = " ", decimal.mark = ",", scientific = FALSE)
+  
+  dados_meta %>% ggplot(aes(x = ano, y = valor, fill = tipo)) +
+    geom_bar(stat = "identity", position = "dodge") + 
+    geom_text(aes(label=valor), 
+              position=position_dodge(width=0.9), vjust=-0.25,
+              size = 5, fontface = "bold", family = "Fira Sans") +
+    guides(fill=guide_legend(title="Situação")) +
+    theme_wsj() + scale_y_continuous(labels = point)
+  
   
 }
 

@@ -4,33 +4,44 @@ library(readxl)
 
 source("utils.R")
 
+header <- dashboardHeader(titleWidth = 500)
+anchor <- tags$a(href='https://documentos.ufersa.edu.br/planejamentos/pdi/',
+                 tags$img(src='imagename.png', height='40', width='90'),
+                 'Plano de Desenvolvimento Institucional - UFERSA')
+
+header$children[[2]]$children <- tags$div(
+  tags$head(tags$style(HTML(".name { background-color: #E4E5E5 }"))),
+  anchor,
+  class = 'name')
+
 
 ui <- dashboardPage(skin = "blue",
   
-  dashboardHeader(title = "Plano de Desenvolvimento Institucional - UFERSA",
-                  titleWidth = 500),
+  header,  
+  # dashboardHeader(title = "Plano de Desenvolvimento Institucional - UFERSA",
+  #                 titleWidth = 500),
   
   dashboardSidebar(id="", width = 350,
                    sidebarMenu(
                      menuItem(h5("Perspectiva Financeira"), 
                               tabName = "Financeira", 
-                              icon = icon("th-large", lib = "glyphicon")),
+                              icon = icon("usd", lib = "glyphicon")),
                      
                      menuItem(h5("Perspectiva Sociedade"), 
                               tabName = "Sociedade",
-                              icon = icon("book", lib = "glyphicon")),
+                              icon = icon("user", lib = "glyphicon")),
                      
                      menuItem(h5("Perspectiva Processos Internos"), 
                               tabName = "Processos_internos",
-                              icon = icon("book", lib = "glyphicon")),
+                              icon = icon("transfer", lib = "glyphicon")),
                      
                      menuItem(h5("Perspectiva Aprendizagem e Crescimento"), 
                               tabName = "Aprendizagem_crescimento",
-                              icon = icon("book", lib = "glyphicon")),
+                              icon = icon("education", lib = "glyphicon")),
                      
-                     menuItem(h5("Tabela"), 
+                     menuItem(h5("Planilha de Metas"), 
                               tabName = "table",
-                              icon = icon("envelope", lib = "glyphicon"))
+                              icon = icon("th", lib = "glyphicon"))
                    )),
   
   dashboardBody(
