@@ -70,28 +70,26 @@ filtra_status <- function(meta){
 
 plot_meta <- function(dados_meta){
   
-  # dados_meta$ano <- as.factor(dados_meta$ano) 
-  # 
-  # # Here we define spaces as the big separator
-  # point <- format_format(big.mark = " ", decimal.mark = ",", scientific = FALSE)
-  # 
-  # dados_meta %>% ggplot(aes(x = ano, y = valor, fill = tipo)) +
-  #   geom_bar(stat = "identity", position = "dodge") + 
-  #   geom_text(aes(label=valor), 
-  #             position=position_dodge(width=0.9), vjust=-0.25,
-  #             size = 5, fontface = "bold", family = "Fira Sans") +
-  #   guides(fill=guide_legend(title="Situação")) +
-  #   theme_wsj() + scale_y_continuous(labels = point)
+  dados_meta$ano <- as.factor(dados_meta$ano)
+
+  # Here we define spaces as the big separator
+  point <- format_format(big.mark = " ", decimal.mark = ",", scientific = FALSE)
+
+  dados_meta %>% ggplot(aes(x = ano, y = valor, fill = tipo)) +
+    geom_bar(stat = "identity", position = "dodge") +
+    guides(fill=guide_legend(title="")) +
+    scale_y_continuous(labels = point) + theme_minimal()
   
-  dados_meta %>% 
-    plot_ly(x = ~ ano, y = ~ valor, color = ~tipo, type = "bar",
-            text = df$valor, textposition = "auto", 
-            textfont = list(color = 'rgb(0,0,0)')) %>% 
-    config(displaylogo = FALSE,
-           modeBarButtonsToRemove = c("zoom2d", "pan2d", "select2d", "lasso2d", 
-                                      "zoomIn2d", "zoomOut2d", "autoScale2d", 
-                                      "resetScale2d", "hoverClosestCartesian", 
-                                      "hoverCompareCartesian"))
+  
+  # dados_meta %>%
+  #   plot_ly(x = ~ ano, y = ~ valor, color = ~tipo, type = "bar",
+  #           text = df$valor, textposition = "auto",
+  #           textfont = list(color = 'rgb(0,0,0)')) %>%
+  #   config(displaylogo = FALSE,
+  #          modeBarButtonsToRemove = c("zoom2d", "pan2d", "select2d", "lasso2d",
+  #                                     "zoomIn2d", "zoomOut2d", "autoScale2d",
+  #                                     "resetScale2d", "hoverClosestCartesian",
+  #                                     "hoverCompareCartesian"))
   
   
 }

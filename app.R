@@ -302,6 +302,7 @@ server <- function(input, output) {
                    print(test)
                    test})
   
+  
   # recebe a meta
   meta2 <- reactive({test = input$choice2 %>% filtra_meta()
                    print(test)
