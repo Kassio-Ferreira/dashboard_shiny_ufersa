@@ -5,7 +5,7 @@
 
 my_packages = c("readxl", "tidyr", "dplyr", "readxl", "ggplot2",
                 "reshape2", "shiny", "shinydashboard", "DT", "ggthemes",
-                "scales")
+                "scales", "plotly")
 
 
 install_if_missing = function(p) {

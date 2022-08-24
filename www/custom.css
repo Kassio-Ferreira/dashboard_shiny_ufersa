@@ -1,5 +1,5 @@
 /* logo*/
-.skin-blue .main-header .logo {
+.main-header .logo {
   font-family: "Georgia", Times, "Times New Roman", serif;
   font-weight: bold;
   font-color: black; 
@@ -13,7 +13,7 @@
 }
 */
 
-/* navbar (rest of the header) 
+/* navbar (rest of the header) */
 .skin-blue .main-header .navbar {
   background-color: #243E6A;
 }  

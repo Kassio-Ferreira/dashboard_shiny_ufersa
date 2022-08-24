@@ -4,18 +4,18 @@ library(readxl)
 
 source("utils.R")
 
-header <- dashboardHeader(titleWidth = 500)
+header <- dashboardHeader(titleWidth = 350)
 anchor <- tags$a(href='https://documentos.ufersa.edu.br/planejamentos/pdi/',
                  tags$img(src='imagename.png', height='40', width='90'),
-                 'Plano de Desenvolvimento Institucional - UFERSA')
+                 'PDI 2021-2025')
 
 header$children[[2]]$children <- tags$div(
-  tags$head(tags$style(HTML(".name { background-color: #E4E5E5 }"))),
+  tags$head(tags$style(HTML(".name { background-color: #FFFFFF }"))),
   anchor,
   class = 'name')
 
 
-ui <- dashboardPage(skin = "blue", title = "PDI UFERSA",
+ui <- dashboardPage(skin = "black", title = "PDI UFERSA",
   
   header,  
   # dashboardHeader(title = "Plano de Desenvolvimento Institucional - UFERSA",
@@ -63,7 +63,7 @@ ui <- dashboardPage(skin = "blue", title = "PDI UFERSA",
                          box(
                            width = 12,
                            title = "Selecione a Meta do PDI",
-                           status = "warning",
+                           status = "info",
                            solidHeader = TRUE,
                            collapsible = TRUE,
                            selectInput("choice1","Metas", choices = lista_financeira)
@@ -71,14 +71,18 @@ ui <- dashboardPage(skin = "blue", title = "PDI UFERSA",
                        ),
                        
                        div(
-                         box(
-                           width = 12,
-                           title = "Acompanhamento da Meta",
-                           status = "warning",
-                           solidHeader = TRUE,
-                           collapsible = TRUE,
-                           plotOutput("plot1")
-                         ), style = "text-align: center;"
+                         box(width = 12,
+                             title = "Acompanhamento da Meta",
+                             status = "info",
+                             solidHeader = TRUE,
+                             collapsible = TRUE,
+                           tabBox(
+                             width = 12,
+                             id = "tabset1",
+                             tabPanel("Gráfico", plotlyOutput("plot1")),
+                             tabPanel("Tabela", DTOutput("tbl_financeira"))
+                             )
+                           ), style = "text-align: center;"
                        )
                        
                 )
@@ -88,11 +92,22 @@ ui <- dashboardPage(skin = "blue", title = "PDI UFERSA",
               ),
               
               fluidRow(
-                # Dynamic infoBoxes
-                infoBoxOutput("perspectiva"),
-                infoBoxOutput("objetivo"),
-                infoBoxOutput("status")
+                
+                div(
+                  box(
+                    width = 12,
+                    title = "Perspectiva, objetivo e status da meta",
+                    status = "info",
+                    solidHeader = TRUE,
+                    collapsible = TRUE,
+                    # Dynamic infoBoxes
+                    infoBoxOutput("perspectiva"),
+                    infoBoxOutput("objetivo"),
+                    infoBoxOutput("status")
+                  )
+                )
               )
+                  
               
       ), 
       
@@ -106,7 +121,7 @@ ui <- dashboardPage(skin = "blue", title = "PDI UFERSA",
                          box(
                            width = 12,
                            title = "Selecione a Meta do PDI",
-                           status = "warning",
+                           status = "info",
                            solidHeader = TRUE,
                            collapsible = TRUE,
                            selectInput("choice2","Metas", choices = lista_sociedade)
@@ -114,13 +129,17 @@ ui <- dashboardPage(skin = "blue", title = "PDI UFERSA",
                        ),
                        
                        div(
-                         box(
-                           width = 12,
-                           title = "Acompanhamento da Meta",
-                           status = "warning",
-                           solidHeader = TRUE,
-                           collapsible = TRUE,
-                           plotOutput("plot2")
+                         box(width = 12,
+                             title = "Acompanhamento da Meta",
+                             status = "info",
+                             solidHeader = TRUE,
+                             collapsible = TRUE,
+                             tabBox(
+                               width = 12,
+                               id = "tabset2",
+                               tabPanel("Gráfico", plotlyOutput("plot2")),
+                               tabPanel("Tabela", DTOutput("tbl_sociedade"))
+                             )
                          ), style = "text-align: center;"
                        )
                        
@@ -131,10 +150,19 @@ ui <- dashboardPage(skin = "blue", title = "PDI UFERSA",
               ),
               
               fluidRow(
-                # Dynamic infoBoxes
-                infoBoxOutput("perspectiva2"),
-                infoBoxOutput("objetivo2"),
-                infoBoxOutput("status2")
+                div(
+                  box(
+                    width = 12,
+                    title = "Perspectiva, objetivo e status da meta",
+                    status = "info",
+                    solidHeader = TRUE,
+                    collapsible = TRUE,
+                    # Dynamic infoBoxes
+                    infoBoxOutput("perspectiva2"),
+                    infoBoxOutput("objetivo2"),
+                    infoBoxOutput("status2")
+                  )
+                )
               )
               
               
@@ -150,7 +178,7 @@ ui <- dashboardPage(skin = "blue", title = "PDI UFERSA",
                          box(
                            width = 12,
                            title = "Selecione a Meta do PDI",
-                           status = "warning",
+                           status = "info",
                            solidHeader = TRUE,
                            collapsible = TRUE,
                            selectInput("choice3","Metas", choices = lista_processos_internos)
@@ -158,13 +186,17 @@ ui <- dashboardPage(skin = "blue", title = "PDI UFERSA",
                        ),
                        
                        div(
-                         box(
-                           width = 12,
-                           title = "Acompanhamento da Meta",
-                           status = "warning",
-                           solidHeader = TRUE,
-                           collapsible = TRUE,
-                           plotOutput("plot3")
+                         box(width = 12,
+                             title = "Acompanhamento da Meta",
+                             status = "info",
+                             solidHeader = TRUE,
+                             collapsible = TRUE,
+                             tabBox(
+                               width = 12,
+                               id = "tabset3",
+                               tabPanel("Gráfico", plotlyOutput("plot3")),
+                               tabPanel("Tabela", DTOutput("tbl_processos_internos"))
+                             )
                          ), style = "text-align: center;"
                        )
                        
@@ -175,10 +207,19 @@ ui <- dashboardPage(skin = "blue", title = "PDI UFERSA",
               ),
               
               fluidRow(
-                # Dynamic infoBoxes
-                infoBoxOutput("perspectiva3"),
-                infoBoxOutput("objetivo3"),
-                infoBoxOutput("status3")
+                div(
+                  box(
+                    width = 12,
+                    title = "Perspectiva, objetivo e status da meta",
+                    status = "info",
+                    solidHeader = TRUE,
+                    collapsible = TRUE,
+                    # Dynamic infoBoxes
+                    infoBoxOutput("perspectiva3"),
+                    infoBoxOutput("objetivo3"),
+                    infoBoxOutput("status3")
+                  )
+                )
               )
               
               
@@ -194,7 +235,7 @@ ui <- dashboardPage(skin = "blue", title = "PDI UFERSA",
                          box(
                            width = 12,
                            title = "Selecione a Meta do PDI",
-                           status = "warning",
+                           status = "info",
                            solidHeader = TRUE,
                            collapsible = TRUE,
                            selectInput("choice4","Metas", choices = lista_aprendizagem_crescimento)
@@ -202,13 +243,17 @@ ui <- dashboardPage(skin = "blue", title = "PDI UFERSA",
                        ),
                        
                        div(
-                         box(
-                           width = 12,
-                           title = "Acompanhamento da Meta",
-                           status = "warning",
-                           solidHeader = TRUE,
-                           collapsible = TRUE,
-                           plotOutput("plot4")
+                         box(width = 12,
+                             title = "Acompanhamento da Meta",
+                             status = "info",
+                             solidHeader = TRUE,
+                             collapsible = TRUE,
+                             tabBox(
+                               width = 12,
+                               id = "tabset4",
+                               tabPanel("Gráfico", plotlyOutput("plot4")),
+                               tabPanel("Tabela", DTOutput("tbl_aprendizagem_crescimento"))
+                             )
                          ), style = "text-align: center;"
                        )
                        
@@ -219,10 +264,19 @@ ui <- dashboardPage(skin = "blue", title = "PDI UFERSA",
               ),
               
               fluidRow(
-                # Dynamic infoBoxes
-                infoBoxOutput("perspectiva4"),
-                infoBoxOutput("objetivo4"),
-                infoBoxOutput("status4")
+                div(
+                  box(
+                    width = 12,
+                    title = "Perspectiva, objetivo e status da meta",
+                    status = "info",
+                    solidHeader = TRUE,
+                    collapsible = TRUE,
+                    # Dynamic infoBoxes
+                    infoBoxOutput("perspectiva4"),
+                    infoBoxOutput("objetivo4"),
+                    infoBoxOutput("status4")
+                  )
+                )
               )
               
               
@@ -264,22 +318,22 @@ server <- function(input, output) {
   
   
   # grafico
-  output$plot1 <- renderPlot({
+  output$plot1 <- renderPlotly({
     plot_meta(meta())
   })
   
   # grafico
-  output$plot2 <- renderPlot({
+  output$plot2 <- renderPlotly({
     plot_meta(meta2())
   })
   
   # grafico
-  output$plot3 <- renderPlot({
+  output$plot3 <- renderPlotly({
     plot_meta(meta3())
   })
   
   # grafico
-  output$plot4 <- renderPlot({
+  output$plot4 <- renderPlotly({
     plot_meta(meta4())
   })
   
@@ -358,8 +412,41 @@ server <- function(input, output) {
   
   # tabela geral
   output$tbl <- renderDT(
-    metas_para_BI[, -(12:13)] %>% datatable(rownames = FALSE)
-  )
+    metas_para_BI[, -(12:13)] %>% datatable(rownames = FALSE,
+                                            filter='top',
+                                            extensions = "Buttons",
+                                            options = list(
+                                              dom = "Blfrtip",
+                                              buttons =
+                                                c('copy', 'csv',
+                                                'excel','pdf',
+                                                'print'),
+                                              lengthMenu = 
+                                                list(c(10, 25, 50, -1), 
+                                                     c(10, 25, 50, "All"))
+                                              )
+                                            )
+    )
+  
+  # tabela financeira
+  output$tbl_financeira <- renderDT(
+    filtra_tabela(input$choice1)
+    )
+  
+  # tabela sociedade
+  output$tbl_sociedade <- renderDT(
+    filtra_tabela(input$choice2)
+    )
+  
+  # tabela processos internos
+  output$tbl_processos_internos <- renderDT(
+    filtra_tabela(input$choice3)
+    )
+  
+  # tabela aprendizagem e crescimento
+  output$tbl_aprendizagem_crescimento <- renderDT(
+    filtra_tabela(input$choice4)
+    )
   
   
   reactive({input$choice1 %>% filtra_status}) -> status_meta
